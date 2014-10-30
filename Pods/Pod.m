@@ -17,8 +17,7 @@
 @dynamic version;
 @dynamic identifier;
 
-- (void)loadFromDictionary:(NSDictionary *)dictionary
-{
+- (void)loadFromDictionary:(NSDictionary *)dictionary {
     self.name = dictionary[@"name"];
     self.source = dictionary[@"source"][@"git"];
     self.homepage = dictionary[@"homepage"];
@@ -26,8 +25,7 @@
     self.version = dictionary[@"version"];
 }
 
-+ (Pod *)findOrCreatePodWithIdentifier:(NSString *)identifier inContext:(NSManagedObjectContext *)context
-{
++ (Pod *)findOrCreatePodWithIdentifier:(NSString *)identifier inContext:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"identifier = %@", identifier];
     NSError *error = nil;
@@ -37,7 +35,8 @@
     }
     if (result.lastObject) {
         return result.lastObject;
-    } else {
+    }
+    else {
         Pod *pod = [self insertNewObjectIntoContext:context];
         pod.identifier = identifier;
         return pod;

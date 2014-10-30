@@ -17,8 +17,7 @@
 @implementation Importer
 
 
-- (instancetype)initWithContext:(NSManagedObjectContext *)context webservice:(PodsWebservice *)webservice
-{
+- (instancetype)initWithContext:(NSManagedObjectContext *)context webservice:(PodsWebservice *)webservice {
     self = [super init];
     if (self) {
         _context = context;
@@ -27,13 +26,10 @@
     return self;
 }
 
-- (void)import
-{
+- (void)import {
     self.batchCount = 0;
-    [self.webservice fetchAllPods:^(NSArray *pods)
-    {
-        [self.context performBlock:^
-        {
+    [self.webservice fetchAllPods:^(NSArray *pods) {
+        [self.context performBlock:^{
             for(NSDictionary *podSpec in pods) {
                 NSString *identifier = [podSpec[@"name"] stringByAppendingString:podSpec[@"version"]];
                 Pod *pod = [Pod findOrCreatePodWithIdentifier:identifier inContext:self.context];
@@ -41,9 +37,8 @@
             }
             self.batchCount++;
             if (self.batchCount % 10 == 0) {
-                NSError *error = nil;
-                [self.context save:&error];
-                if (error) {
+                NSError *error;
+                if (![self.context save:&error]) {
                     NSLog(@"Error: %@", error.localizedDescription);
                 }
             }

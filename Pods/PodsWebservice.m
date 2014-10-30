@@ -12,13 +12,11 @@
 
 @implementation PodsWebservice
 
-- (void)fetchAllPods:(void (^)(NSArray *pods))callback
-{
+- (void)fetchAllPods:(void (^)(NSArray *pods))callback {
     [self fetchAllPods:callback page:0];
 }
 
-- (void)fetchAllPods:(void (^)(NSArray *pods))callback page:(NSUInteger)page
-{
+- (void)fetchAllPods:(void (^)(NSArray *pods))callback page:(NSUInteger)page {
     NSString *urlString = [NSString stringWithFormat:@"http://localhost:4567/specs?page=%lu", (unsigned long)page];
     NSURL *url = [NSURL URLWithString:urlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:
@@ -28,7 +26,7 @@
             callback(nil);
             return;
         }
-        NSError *jsonError = nil;
+        NSError *jsonError;
         id result = [NSJSONSerialization JSONObjectWithData:data
                                                     options:NSJSONReadingMutableContainers
                                                       error:&jsonError];

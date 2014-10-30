@@ -15,6 +15,8 @@
 @interface AppDelegate ()
 
 @property (nonatomic, readwrite) Importer *importer;
+@property (nonatomic, readonly) NSURL *storeURL;
+@property (nonatomic, readonly) NSURL *modelURL;
 
 @end
 
@@ -22,9 +24,11 @@
 
 - (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions
 {
-    self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
+    self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL
+                                                            modelURL:self.modelURL];
     self.webservice = [[PodsWebservice alloc] init];
-    self.importer = [[Importer alloc] initWithContext:self.persistentStack.backgroundManagedObjectContext webservice:self.webservice];
+    self.importer = [[Importer alloc] initWithContext:self.persistentStack.backgroundManagedObjectContext
+                                           webservice:self.webservice];
     [self.importer import];
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -33,24 +37,21 @@
     return YES;
 }
 
-- (void)applicationWillTerminate:(__unused UIApplication *)application
-{
+- (void)applicationWillTerminate:(__unused UIApplication *)application {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
 
-- (void)saveContext
-{
-    NSError *error = nil;
+- (void)saveContext {
+    NSError *error;
     [self.persistentStack.managedObjectContext save:&error];
     if (error) {
         NSLog(@"error saving: %@", error.localizedDescription);
     }
 }
 
-- (NSURL*)storeURL
-{
-    NSURL* documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+- (NSURL *)storeURL {
+    NSURL *documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
                                                                        inDomain:NSUserDomainMask
                                                               appropriateForURL:nil
                                                                          create:YES
@@ -58,8 +59,7 @@
     return [documentsDirectory URLByAppendingPathComponent:@"db.sqlite"];
 }
 
-- (NSURL*)modelURL
-{
+- (NSURL *)modelURL {
     return [[NSBundle mainBundle] URLForResource:@"Pods" withExtension:@"momd"];
 }
 

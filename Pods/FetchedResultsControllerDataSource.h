@@ -18,8 +18,8 @@
 @property (nonatomic, copy) NSString* reuseIdentifier;
 @property (nonatomic) BOOL paused;
 
-- (instancetype)initWithTableView:(UITableView*)tableView;
-- (id)objectAtIndexPath:(NSIndexPath*)indexPath;
+- (instancetype)initWithTableView:(UITableView *)tableView;
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
 - (id)selectedItem;
 
 @end

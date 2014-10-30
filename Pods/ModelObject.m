@@ -6,13 +6,11 @@
 
 @implementation ModelObject
 
-+ (NSString *)entityName
-{
++ (NSString *)entityName {
     return NSStringFromClass(self);
 }
 
-+ (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext*)context
-{
++ (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context {
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName]
                                          inManagedObjectContext:context];
 }

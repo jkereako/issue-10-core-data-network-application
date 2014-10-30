@@ -9,17 +9,16 @@
 
 @interface PersistentStack ()
 
-@property (nonatomic, readwrite) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic, readwrite) NSManagedObjectContext* backgroundManagedObjectContext;
-@property (nonatomic) NSURL* modelURL;
-@property (nonatomic) NSURL* storeURL;
+@property (nonatomic, readwrite) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readwrite) NSManagedObjectContext *backgroundManagedObjectContext;
+@property (nonatomic) NSURL *modelURL;
+@property (nonatomic) NSURL *storeURL;
 
 @end
 
 @implementation PersistentStack
 
-- (instancetype)initWithStoreURL:(NSURL*)storeURL modelURL:(NSURL*)modelURL
-{
+- (instancetype)initWithStoreURL:(NSURL*)storeURL modelURL:(NSURL *)modelURL {
     self = [super init];
     if (self) {
         _storeURL = storeURL;
@@ -29,8 +28,7 @@
     return self;
 }
 
-- (void)setupManagedObjectContexts
-{
+- (void)setupManagedObjectContexts {
     self.managedObjectContext = [self setupManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
     self.managedObjectContext.undoManager = [[NSUndoManager alloc] init];
 
@@ -42,7 +40,7 @@
             addObserverForName:NSManagedObjectContextDidSaveNotification
                         object:nil
                          queue:nil
-                    usingBlock:^(NSNotification* note) {
+                    usingBlock:^(NSNotification *note) {
         NSManagedObjectContext *moc = self.managedObjectContext;
         if (note.object != moc) {
             [moc performBlock:^(){
@@ -67,11 +65,11 @@
         NSLog(@"error: %@", error.localizedDescription);
         NSLog(@"rm \"%@\"", self.storeURL.path);
     }
+    
     return managedObjectContext;
 }
 
-- (NSManagedObjectModel*)managedObjectModel
-{
+- (NSManagedObjectModel *)managedObjectModel {
     return [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
 }
 

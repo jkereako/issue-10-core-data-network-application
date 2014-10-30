@@ -16,9 +16,9 @@
 
 @implementation PodDetailViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = self.pod.name;
     self.version.text = self.pod.version;
     self.authors.text = [[self.pod.authors allKeys] componentsJoinedByString:@", "];
