@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
-#import "OBJMasterViewController.h"
 #import "PersistentStack.h"
 #import "PodsWebservice.h"
 #import "Importer.h"
