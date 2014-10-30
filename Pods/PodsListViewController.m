@@ -36,12 +36,12 @@
     cell.detailTextLabel.text = object.version;
 }
 
-- (void)deleteObject:(id)object
+- (void)deleteObject:(__unused id)object
 {
 
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(__unused id)sender
 {
     PodDetailViewController *detailViewController = segue.destinationViewController;
     detailViewController.pod = self.dataSource.selectedItem;

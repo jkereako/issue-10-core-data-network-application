@@ -21,7 +21,7 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions
 {
     self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL modelURL:self.modelURL];
     self.webservice = [[PodsWebservice alloc] init];
@@ -34,7 +34,7 @@
     return YES;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+- (void)applicationWillTerminate:(__unused UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];

@@ -25,22 +25,23 @@
     return self;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
+- (NSInteger)numberOfSectionsInTableView:(__unused UITableView*)tableView
 {
-    return self.fetchedResultsController.sections.count;
+    return (NSInteger)self.fetchedResultsController.sections.count;
 }
 
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)sectionIndex
+- (NSInteger)tableView:(__unused UITableView*)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    id<NSFetchedResultsSectionInfo> section = self.fetchedResultsController.sections[sectionIndex];
-    return section.numberOfObjects;
+    id<NSFetchedResultsSectionInfo> section = self.fetchedResultsController.sections[(NSUInteger)sectionIndex];
+    return (NSInteger)section.numberOfObjects;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     id object = [self objectAtIndexPath:indexPath];
     id cell = [tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-    [self.delegate configureCell:cell withObject:object];
+    id<FetchedResultsControllerDataSourceDelegate> strongDelegate = self.delegate;
+    [strongDelegate configureCell:cell withObject:object];
     return cell;
 }
 
@@ -49,30 +50,31 @@
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
-- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath
+- (BOOL)tableView:(__unused UITableView*)tableView canEditRowAtIndexPath:(__unused NSIndexPath*)indexPath
 {
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(__unused UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    id<FetchedResultsControllerDataSourceDelegate> strongDelegate = self.delegate;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.delegate deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [strongDelegate deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
 
 #pragma mark NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
+- (void)controllerWillChangeContent:(__unused NSFetchedResultsController*)controller
 {
     [self.tableView beginUpdates];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
+- (void)controllerDidChangeContent:(__unused NSFetchedResultsController*)controller
 {
     [self.tableView endUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController*)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath*)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath*)newIndexPath
+- (void)controller:(__unused NSFetchedResultsController*)controller didChangeObject:(__unused id)anObject atIndexPath:(NSIndexPath*)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath*)newIndexPath
 {
     if (type == NSFetchedResultsChangeInsert) {
         [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

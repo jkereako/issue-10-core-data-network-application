@@ -19,17 +19,19 @@
 
 - (void)fetchAllPods:(void (^)(NSArray *pods))callback page:(NSUInteger)page
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://localhost:4567/specs?page=%d", page];
+    NSString *urlString = [NSString stringWithFormat:@"http://localhost:4567/specs?page=%lu", (unsigned long)page];
     NSURL *url = [NSURL URLWithString:urlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:
-      ^(NSData *data, NSURLResponse *response, NSError *error) {
+      ^(NSData *data, __unused NSURLResponse *response, NSError *error) {
         if (error) {
             NSLog(@"error: %@", error.localizedDescription);
             callback(nil);
             return;
         }
         NSError *jsonError = nil;
-        id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        id result = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&jsonError];
         if ([result isKindOfClass:[NSDictionary class]]) {
             NSArray *pods = result[@"result"];
             callback(pods);
