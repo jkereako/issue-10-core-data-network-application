@@ -4,10 +4,10 @@
 
 #import "PodsWebservice.h"
 
-
 @interface PodsWebservice ()
 
-@property (nonatomic, strong) NSURLSessionDataTask *task;
+@property (nonatomic) NSURLSessionDataTask *task;
+
 @end
 
 @implementation PodsWebservice

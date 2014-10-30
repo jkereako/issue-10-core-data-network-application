@@ -2,10 +2,7 @@
 // Created by Chris Eidhof
 //
 
-
-#import <CoreData/CoreData.h>
 #import "FetchedResultsControllerDataSource.h"
-
 
 @interface FetchedResultsControllerDataSource ()
 
@@ -15,7 +12,7 @@
 
 @implementation FetchedResultsControllerDataSource
 
-- (id)initWithTableView:(UITableView*)tableView
+- (instancetype)initWithTableView:(UITableView*)tableView
 {
     self = [super init];
     if (self) {

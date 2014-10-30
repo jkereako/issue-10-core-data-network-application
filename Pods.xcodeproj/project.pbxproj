@@ -157,12 +157,12 @@
 				83A5EEE818C3C35D0018CCD0 /* Supporting Files */,
 				83A5EF1D18C3C4300018CCD0 /* PodsListViewController.h */,
 				83A5EF1E18C3C4300018CCD0 /* PodsListViewController.m */,
-				5A4162FBA8B2821C00B4AB80 /* PodsWebservice.m */,
 				5A41695CFED94CF1230E5F3C /* PodsWebservice.h */,
-				5A416E4B7DA92EEC6418B6A0 /* Importer.m */,
+				5A4162FBA8B2821C00B4AB80 /* PodsWebservice.m */,
 				5A416968C23AD4AB8ED837F5 /* Importer.h */,
-				5A41669C42F6F1317E3E6045 /* PodDetailViewController.m */,
+				5A416E4B7DA92EEC6418B6A0 /* Importer.m */,
 				5A4161ABD546EDCF5372F5FA /* PodDetailViewController.h */,
+				5A41669C42F6F1317E3E6045 /* PodDetailViewController.m */,
 			);
 			path = Pods;
 			sourceTree = "<group>";

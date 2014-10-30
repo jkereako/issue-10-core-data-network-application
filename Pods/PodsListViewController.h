@@ -6,11 +6,9 @@
 //  Copyright (c) 2014 objc.io. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@class FetchedResultsControllerDataSource;
+@class NSManagedObjectContext;
 
 @interface PodsListViewController : UITableViewController
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

@@ -5,14 +5,12 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "PersistentStack.h"
-
 
 @interface PersistentStack ()
 
-@property (nonatomic,readwrite) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic,readwrite) NSManagedObjectContext* backgroundManagedObjectContext;
+@property (nonatomic, readwrite) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, readwrite) NSManagedObjectContext* backgroundManagedObjectContext;
 @property (nonatomic) NSURL* modelURL;
 @property (nonatomic) NSURL* storeURL;
 
@@ -20,12 +18,12 @@
 
 @implementation PersistentStack
 
-- (id)initWithStoreURL:(NSURL*)storeURL modelURL:(NSURL*)modelURL
+- (instancetype)initWithStoreURL:(NSURL*)storeURL modelURL:(NSURL*)modelURL
 {
     self = [super init];
     if (self) {
-        self.storeURL = storeURL;
-        self.modelURL = modelURL;
+        _storeURL = storeURL;
+        _modelURL = modelURL;
         [self setupManagedObjectContexts];
     }
     return self;

@@ -6,23 +6,23 @@
 #import "PodsWebservice.h"
 #import "Pod.h"
 
-
 @interface Importer ()
 
-@property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) PodsWebservice *webservice;
+@property (nonatomic) NSManagedObjectContext *context;
+@property (nonatomic) PodsWebservice *webservice;
 @property (nonatomic) int batchCount;
+
 @end
 
 @implementation Importer
 
 
-- (id)initWithContext:(NSManagedObjectContext *)context webservice:(PodsWebservice *)webservice
+- (instancetype)initWithContext:(NSManagedObjectContext *)context webservice:(PodsWebservice *)webservice
 {
     self = [super init];
     if (self) {
-        self.context = context;
-        self.webservice = webservice;
+        _context = context;
+        _webservice = webservice;
     }
     return self;
 }

@@ -6,16 +6,13 @@
 //  Copyright (c) 2014 objc.io. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @class PersistentStack;
 @class PodsWebservice;
-@class Importer;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) UIWindow *window;
+@property (nonatomic) PersistentStack *persistentStack;
+@property (nonatomic) PodsWebservice *webservice;
 
-@property (nonatomic, strong) PersistentStack *persistentStack;
-@property (nonatomic, strong) PodsWebservice *webservice;
 @end

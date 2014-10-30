@@ -16,7 +16,8 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) Importer *importer;
+@property (nonatomic, readwrite) Importer *importer;
+
 @end
 
 @implementation AppDelegate

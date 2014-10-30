@@ -8,7 +8,6 @@
 
 #import "Pod.h"
 
-
 @implementation Pod
 
 @dynamic authors;
