@@ -83,7 +83,12 @@
     NSAssert(_fetchedResultsController == nil, @"TODO: you can currently only assign this property once");
     _fetchedResultsController = fetchedResultsController;
     fetchedResultsController.delegate = self;
-    [fetchedResultsController performFetch:NULL];
+    
+    NSError *error;
+    
+    if(![fetchedResultsController performFetch:&error]) {
+         NSLog(@"error: %@", error.localizedDescription);
+    }
 }
 
 

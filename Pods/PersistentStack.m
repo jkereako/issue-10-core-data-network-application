@@ -50,8 +50,7 @@
      }];
 }
 
-- (NSManagedObjectContext *)setupManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
-{
+- (NSManagedObjectContext *)setupManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType {
     NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
     managedObjectContext.persistentStoreCoordinator =
             [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];

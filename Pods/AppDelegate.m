@@ -22,19 +22,24 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions
-{
-    self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL
-                                                            modelURL:self.modelURL];
-    self.webservice = [[PodsWebservice alloc] init];
-    self.importer = [[Importer alloc] initWithContext:self.persistentStack.backgroundManagedObjectContext
-                                           webservice:self.webservice];
-    [self.importer import];
+- (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     PodsListViewController *listViewController = (PodsListViewController *) navigationController.topViewController;
+    
+    self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL
+                                                            modelURL:self.modelURL];
+    self.webservice = [PodsWebservice new];
+    self.importer = [[Importer alloc] initWithContext:self.persistentStack.backgroundManagedObjectContext
+                                           webservice:self.webservice];
+    [self.importer import];
+    
     listViewController.managedObjectContext = self.persistentStack.managedObjectContext;
     return YES;
+}
+
+- (void)applicationDidEnterBackground:(__unused UIApplication *)application {
+    [self saveContext];
 }
 
 - (void)applicationWillTerminate:(__unused UIApplication *)application {

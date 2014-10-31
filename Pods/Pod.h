@@ -11,7 +11,7 @@
 @interface Pod : ModelObject
 
 @property (nonatomic) id authors;
-@property (nonatomic) NSString *homepage;
+@property (nonatomic) NSString *link;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *source;
 @property (nonatomic) NSString *version;

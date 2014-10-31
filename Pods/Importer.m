@@ -8,9 +8,10 @@
 
 @interface Importer ()
 
-@property (nonatomic) NSManagedObjectContext *context;
-@property (nonatomic) PodsWebservice *webservice;
-@property (nonatomic) int batchCount;
+@property (nonatomic, readwrite) NSManagedObjectContext *context;
+@property (nonatomic, readwrite) PodsWebservice *webservice;
+@property (nonatomic, readwrite) NSUInteger batchSize;
+@property (nonatomic, readwrite) NSUInteger batchCount;
 
 @end
 
@@ -22,6 +23,7 @@
     if (self) {
         _context = context;
         _webservice = webservice;
+        _batchSize = 10;
     }
     return self;
 }
@@ -31,17 +33,19 @@
     [self.webservice fetchAllPods:^(NSArray *pods) {
         [self.context performBlock:^{
             for(NSDictionary *podSpec in pods) {
-                NSString *identifier = [podSpec[@"name"] stringByAppendingString:podSpec[@"version"]];
-                Pod *pod = [Pod findOrCreatePodWithIdentifier:identifier inContext:self.context];
+                NSString *identifier = [podSpec[@"id"] stringByAppendingString:podSpec[@"version"]];
+                Pod *pod = [Pod findOrCreatePodWithIdentifier:identifier
+                                                    inContext:self.context];
                 [pod loadFromDictionary:podSpec];
             }
-            self.batchCount++;
-            if (self.batchCount % 10 == 0) {
+            //@TODO: Fix this
+//            self.batchCount++;
+//            if (self.batchCount % self.batchSize == 0) {
                 NSError *error;
                 if (![self.context save:&error]) {
                     NSLog(@"Error: %@", error.localizedDescription);
                 }
-            }
+//            }
         }];
     }];
 }

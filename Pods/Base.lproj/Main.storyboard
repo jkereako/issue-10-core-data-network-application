@@ -64,6 +64,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="wKk-wy-vfl">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="pGg-6v-bdr" eventType="valueChanged" id="0cf-Si-wbE"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,7 +194,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="authors" destination="LSa-Fo-FBR" id="0WE-mI-Peq"/>
-                        <outlet property="homepage" destination="h56-EB-yPU" id="uDf-FM-DML"/>
+                        <outlet property="link" destination="h56-EB-yPU" id="B8J-yC-fCO"/>
                         <outlet property="source" destination="UWy-VU-I03" id="FOV-W1-34Y"/>
                         <outlet property="version" destination="Lql-BE-Le5" id="3HF-R1-FlT"/>
                     </connections>
