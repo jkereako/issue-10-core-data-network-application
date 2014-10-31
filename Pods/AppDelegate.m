@@ -23,9 +23,6 @@
 @implementation AppDelegate
 
 - (BOOL)application:(__unused UIApplication *)application didFinishLaunchingWithOptions:(__unused NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    PodsListViewController *listViewController = (PodsListViewController *) navigationController.topViewController;
     
     self.persistentStack = [[PersistentStack alloc] initWithStoreURL:self.storeURL
                                                             modelURL:self.modelURL];
@@ -34,6 +31,9 @@
                                            webservice:self.webservice];
     [self.importer import];
     
+    // Override point for customization after application launch.
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    PodsListViewController *listViewController = (PodsListViewController *) navigationController.topViewController;
     listViewController.managedObjectContext = self.persistentStack.managedObjectContext;
     return YES;
 }

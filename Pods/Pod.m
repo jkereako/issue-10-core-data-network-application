@@ -18,7 +18,7 @@
 @dynamic identifier;
 
 - (void)loadFromDictionary:(NSDictionary *)dictionary {
-    self.name = dictionary[@"name"];
+    self.name = dictionary[@"id"];
     self.source = dictionary[@"source"][@"git"];
     self.link = dictionary[@"link"];
     self.authors = dictionary[@"authors"];
