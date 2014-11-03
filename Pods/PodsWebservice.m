@@ -52,10 +52,11 @@ NSUInteger pageSize = 10;
           
           if ([result isKindOfClass:[NSArray class]]) {
               callback(result);
-              // If the result count is equal to the page size, then there may be
-              // more pods to fetch. If the count is less than the page size, then
-              // we have reached the end of the list. However, if the result count
-              // is larger than pageSize, then our query didn't work :(.
+              // If the result count is equal to the page size, then there may
+              // be more pods to fetch. If the count is less than the page size,
+              // then we have reached the end of the list. However, if the
+              // result count is larger than pageSize, then our query didn't
+              // work :(.
               if ([result count] == pageSize) {
                   [self fetchAllPods:callback query:query page:page + 1];
               }
@@ -75,6 +76,8 @@ NSUInteger pageSize = 10;
     configuration.timeoutIntervalForRequest = 30.0;
     configuration.timeoutIntervalForResource = 60.0;
     configuration.HTTPMaximumConnectionsPerHost = 1;
+    
+    // @see http://blog.cocoapods.org/Search-API-Version-1/
     [configuration setHTTPAdditionalHeaders: @{@"Accept": @"application/vnd.cocoapods.org+flat.hash.json; version=1"}];
     
     _urlSession = [NSURLSession sessionWithConfiguration:configuration

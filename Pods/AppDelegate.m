@@ -39,11 +39,9 @@
 }
 
 - (void)applicationDidEnterBackground:(__unused UIApplication *)application {
-    [self saveContext];
-}
-
-- (void)applicationWillTerminate:(__unused UIApplication *)application {
-    // Saves changes in the application's managed object context before the application terminates.
+    // The developer documentation recommends calling finishTasksAndInvalidate:
+    // when the NSURLSession is no longer needed.
+    [[self.webservice urlSession] finishTasksAndInvalidate];
     [self saveContext];
 }
 
