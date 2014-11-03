@@ -71,11 +71,16 @@ NSUInteger pageSize = 10;
     }
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
+    NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:20 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:urlCache];
+
     configuration.allowsCellularAccess = NO;
     configuration.timeoutIntervalForRequest = 30.0;
     configuration.timeoutIntervalForResource = 60.0;
     configuration.HTTPMaximumConnectionsPerHost = 1;
+    configuration.URLCache=urlCache;
     
     // @see http://blog.cocoapods.org/Search-API-Version-1/
     [configuration setHTTPAdditionalHeaders: @{@"Accept": @"application/vnd.cocoapods.org+flat.hash.json; version=1"}];
