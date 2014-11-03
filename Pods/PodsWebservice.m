@@ -78,8 +78,15 @@ NSUInteger pageSize = 10;
     configuration.allowsCellularAccess = NO;
     configuration.timeoutIntervalForRequest = 30.0;
     configuration.timeoutIntervalForResource = 60.0;
+    // This limit is per-session. For more complex web services, this number
+    // ought to be increased.
     configuration.HTTPMaximumConnectionsPerHost = 1;
-    configuration.URLCache=urlCache;
+
+    // The default cache is [NSURLCache sharedCache] and for this app, the
+    // shared cache is sufficient. However, for more complex web services, a
+    // separate URL cache object may be necessary. A new cache object has been
+    // created for demonstration.
+    configuration.URLCache = urlCache;
     
     // @see http://blog.cocoapods.org/Search-API-Version-1/
     [configuration setHTTPAdditionalHeaders: @{@"Accept": @"application/vnd.cocoapods.org+flat.hash.json; version=1"}];
