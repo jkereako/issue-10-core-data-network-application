@@ -7,7 +7,6 @@
 @interface PodsWebservice ()
 
 @property (nonatomic, readwrite) NSURLSession *urlSession;
-@property (nonatomic) NSURLSessionDataTask *task;
 
 - (void)fetchAllPods:(void (^)(NSArray *pods))callback query:(NSString *) query page:(NSUInteger)page;
 
