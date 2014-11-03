@@ -6,7 +6,10 @@
 
 @protocol FetchedResultsControllerDataSourceDelegate
 
+@required
 - (void)configureCell:(id)cell withObject:(id)object;
+
+@optional
 - (void)deleteObject:(id)object;
 
 @end

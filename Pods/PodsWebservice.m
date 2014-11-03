@@ -17,7 +17,7 @@ NSUInteger pageSize = 10;
 
 @implementation PodsWebservice
 
-- (void)fetchAllPods:(void (^)(NSArray *pods))callback {
+- (void)fetchAllPodsWithCallback:(void (^)(NSArray *pods))callback {
     [self fetchAllPods:callback query:@"on:ios%20test" page:0 ];
 }
 

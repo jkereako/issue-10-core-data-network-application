@@ -30,7 +30,7 @@
 
 - (void)import {
     self.batchCount = 0;
-    [self.webservice fetchAllPods:^(NSArray *pods) {
+    [self.webservice fetchAllPodsWithCallback:^(NSArray *pods) {
         [self.context performBlock:^{
             for(NSDictionary *podSpec in pods) {
                 NSString *identifier = [podSpec[@"id"] stringByAppendingString:podSpec[@"version"]];
